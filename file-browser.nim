@@ -5,7 +5,7 @@ var
     parentDir:string
     parent:string
 
-const info = "up = go to parent folder \ncheck = echo dir you are in \nnavi = open folder in current dir \ncd = open path\nhelp = echo this \nexit = exit "
+const info = "up = go to parent folder \ncheck = echo dir you are in \nnavi = open folder in current dir \ncd = open path\nhelp = echo this \nlist = list files in current dir \nexit = exit "
 
 echo currentDir
 
@@ -43,7 +43,7 @@ proc GoUp(dirRn:string) =
     currentDir = parent
 
 proc Cd() =
-    echo "enter path"
+    echo "enter path"           
     var desire = readLine(stdin)
     var check = dirExists(desire)
     if check == true :
@@ -51,6 +51,16 @@ proc Cd() =
         currentDir = desire
     if check == false :
         echo desire," : does not exist !"
+
+#proc Make() =
+#    echo "enter name ( example.txt )"
+#    var name = readLine(stdin)
+#    echo "making file in ",currentDir
+#    writeFile(currentDir&name, "sz")
+#    writeFile(name,"")
+
+proc List() = 
+    FilesIn(currentDir)
 
 echo info
 
@@ -62,8 +72,12 @@ while true :
         GoTo()
     elif stdInput == "cd" :
         Cd()
+    elif stdInput == "make" :
+        echo "not yet"
     elif stdInput == "check" :
         echo currentDir
+    elif stdInput == "list" :
+        List()
     elif stdInput == "help":
         echo info
     elif stdInput == "exit":
